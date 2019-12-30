@@ -7,7 +7,7 @@
 
 # dependencies
 /node_modules
-/src/assets
+/src/*.scss
 
 # IDEs and editors
 /.idea
