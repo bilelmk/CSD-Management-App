@@ -25,14 +25,10 @@ public class EtudiantController {
     @CrossOrigin(origins = "*")
     @PostMapping(consumes = "application/json", produces = "application/json")
     public Etudiant create(@RequestBody Etudiant et) {
+        System.out.println(et);
         return etudiantService.createEtudiant(et);
     }
 
-//    @CrossOrigin(origins = "*")
-//    @PostMapping("logIn")
-//    public User logIn(@RequestBody User user) {
-//        return userService.logIn(user);
-//    }
 
     @CrossOrigin(origins = "*")
     @PutMapping
@@ -46,30 +42,5 @@ public class EtudiantController {
         etudiantService.deleteEtudiant(id);
     }
 
-//    @CrossOrigin(origins = "*")
-//    @PostMapping("{id}")
-//    public User addUserToGroup(@PathVariable Long id, @RequestBody Groupe groupe) {
-//        return userService.addUserToGroup(id, groupe);
-//    }
-//
-//    @CrossOrigin(origins = "*")
-//    @DeleteMapping("group/{id}")//     /user/group/5?groupe=2
-//    public void deleteUser(@PathVariable Long id, @RequestParam Long groupe) {
-//        userService.deleteUserFromGroup(id, groupe);
-//    }
-//
-//
-//    @CrossOrigin(origins = "*")
-//    @PostMapping("profil/{id}") // /user/profil/5?profil=2
-//    public User addUserToProfil(@PathVariable("id") Long idUser, @RequestParam("profil") Long idProfil) {
-//        return this.userService.addUserToProfil(idUser, idProfil);
-//    }
-//
-//
-//    @CrossOrigin(origins = "*")
-//    @DeleteMapping("profil/{id}") // /user/profil/5?profil=2
-//    public void deleteUserFromProfil(@PathVariable("id") Long idUser, @RequestParam("profil") Long idProfil) {
-//        this.userService.deleteUserFromProfil(idUser, idProfil);
-//    }
 
 }

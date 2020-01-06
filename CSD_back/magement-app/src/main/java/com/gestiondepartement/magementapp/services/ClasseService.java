@@ -29,13 +29,12 @@ public class ClasseService {
 
     public Classe updateClasse(Classe classedetails) {
         Classe classe=this.classeRepository.findById(classedetails.getId_classe()).orElseThrow(()->new ValidationException("classe not found"));
-
         classe.setLibelle(classedetails.getLibelle());
         classe.setNiveau(classedetails.getNiveau());
         classe.setGroupe(classedetails.getGroupe());
-
         return this.classeRepository.save(classe);
-
     }
+
+
 }
 

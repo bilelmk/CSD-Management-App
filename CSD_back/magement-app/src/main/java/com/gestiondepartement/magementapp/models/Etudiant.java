@@ -2,10 +2,7 @@ package com.gestiondepartement.magementapp.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.Getter;
-import lombok.Setter;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
+
 
 import javax.persistence.*;
 
@@ -30,6 +27,10 @@ public class Etudiant {
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String tel ;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private int auth_id  ;
+
 
     @ManyToOne
     @JoinColumn(name = "id_classe")
@@ -89,5 +90,14 @@ public class Etudiant {
 
     public Classe getClasse() {
         return classe;
+    }
+
+
+    public int getAuth_id() {
+        return auth_id;
+    }
+
+    public void setId_etudiant(int id_etudiant) {
+        this.id_etudiant = id_etudiant;
     }
 }

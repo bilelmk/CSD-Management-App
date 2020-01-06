@@ -1,8 +1,6 @@
 package com.gestiondepartement.magementapp.models;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.Getter;
-import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -34,6 +32,8 @@ public class CadreAdministratif {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String poste ;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private int auth_id  ;
 
     public int getId_cadre() {
         return id_cadre;
@@ -89,5 +89,13 @@ public class CadreAdministratif {
 
     public void setPoste(String poste) {
         this.poste = poste;
+    }
+
+    public int getAuth_id() {
+        return auth_id;
+    }
+
+    public void setAuth_id(int auth_id) {
+        this.auth_id = auth_id;
     }
 }

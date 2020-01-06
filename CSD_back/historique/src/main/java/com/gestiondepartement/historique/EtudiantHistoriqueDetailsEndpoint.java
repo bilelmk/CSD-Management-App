@@ -1,14 +1,11 @@
 package com.gestiondepartement.historique;
 
-import java.util.ArrayList;
-import java.util.List;
 
-import com.gestiondepartement.classes.EtudiantHistorique;
-import com.gestiondepartement.classes.GetEtudiantsHistoriqueRequest;
-import com.gestiondepartement.classes.GetEtudiantsHistoriqueResponse;
-
-
+import com.gestiondepartement.classes.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
@@ -29,14 +26,19 @@ public class EtudiantHistoriqueDetailsEndpoint {
 	public GetEtudiantsHistoriqueResponse processEtudiantsHistoriqueRequest(@RequestPayload GetEtudiantsHistoriqueRequest request) {
 
 		EtudiantHistorique h = new EtudiantHistorique() ;
-		h.setId(1);
-		h.setName("bilel");
+		h.setId(2);
+		h.setAnnee(2018);
+		h.setMoyenne(12);
+		Classe classe = new Classe() ;classe.setId(1);classe.setNom("IF4B");
+		Etudiant et = new Etudiant();et.setId(1);et.setCin("12547874"); et.setNom("bilel");et.setPrenom("mekrazi");
+		h.setClasse(classe);
+		h.setEtudiant(et);
 
 		etudiantHistoriqueRepository.save(h) ;
-
 		GetEtudiantsHistoriqueResponse res = new GetEtudiantsHistoriqueResponse() ;
 
 		res.getEtudiantHistorique().add(h) ;
+		
 		return res ;
 	}
 

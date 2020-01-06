@@ -28,11 +28,23 @@ public class Classe {
 
     @OneToOne
     @JoinColumn(name="id_enseignant")
+    @JsonIgnoreProperties(value = {"resp_classe"} ,allowSetters = true)
     private Enseignant responsable ;
 
-//    @OneToMany(mappedBy = "classe")
-//    private List<Cours> liste_cours ;
 
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "classe_modules",
+            joinColumns = { @JoinColumn(name = "id_classe") },
+            inverseJoinColumns = { @JoinColumn(name = "id_module") })
+            private List<Module> liste_modules ;
+
+    public List<Module> getListe_modules() {
+        return liste_modules;
+    }
+
+    public void setListe_modules(List<Module> liste_modules) {
+        this.liste_modules = liste_modules;
+    }
 
     public int getId_classe() {
         return id_classe;

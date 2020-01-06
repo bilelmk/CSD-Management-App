@@ -34,6 +34,7 @@ public class EtudiantService {
         etudiant.setAdresse(etudiantdetails.getAdresse());
         etudiant.setCin(etudiantdetails.getCin());
         etudiant.setTel(etudiantdetails.getTel());
+        etudiant.setClasse(etudiantdetails.getClasse());
 
         return this.etudiantrep.save(etudiant);
     }

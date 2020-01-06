@@ -31,6 +31,9 @@ public class Enseignant {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String grade ;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private int auth_id  ;
+
 //    @OneToMany(mappedBy = "enseignant")
 //    private List<Cours> liste_cours ;
 
@@ -101,5 +104,13 @@ public class Enseignant {
 
     public void setResp_classe(Classe resp_classe) {
         this.resp_classe = resp_classe;
+    }
+
+    public int getAuth_id() {
+        return auth_id;
+    }
+
+    public void setAuth_id(int auth_id) {
+        this.auth_id = auth_id;
     }
 }
