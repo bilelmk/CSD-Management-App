@@ -4,45 +4,27 @@
            targetNamespace="http://GestionDepartement.com" xmlns:tns="http://GestionDepartement.com"
            elementFormDefault="qualified">
 
-    <xs:element name="GetEtudiantsHistoriqueRequest">
-        <xs:complexType>
-        </xs:complexType>
-    </xs:element>
-
-    <xs:element name="GetEtudiantsHistoriqueResponse">
-        <xs:complexType>
+    <xs:element name="GetStatNiveauRequest">
+        <xs:complexType >
             <xs:sequence>
-                <xs:element name="EtudiantHistorique" type="tns:EtudiantHistorique" maxOccurs="unbounded" />
+                <xs:element name="classe" type="xs:string" />
             </xs:sequence>
         </xs:complexType>
     </xs:element>
 
-    <xs:complexType name="EtudiantHistorique">
+    <xs:element name="GetStatNiveauResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="StatNiveau" type="tns:StatNiveau" maxOccurs="unbounded" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="StatNiveau">
         <xs:sequence>
-            <xs:element name="id" type="xs:int" />
             <xs:element name="annee" type="xs:int" />
-            <xs:element name="classe" type="tns:Classe" />
-            <xs:element name="etudiant" type="tns:Etudiant" />
             <xs:element name="moyenne" type="xs:float" />
         </xs:sequence>
     </xs:complexType>
-
-
-    <xs:complexType name="Classe">
-        <xs:sequence>
-            <xs:element name="id" type="xs:int" />
-            <xs:element name="nom" type="xs:string" />
-        </xs:sequence>
-    </xs:complexType>
-
-    <xs:complexType name="Etudiant">
-        <xs:sequence>
-            <xs:element name="id" type="xs:int" />
-            <xs:element name="nom" type="xs:string" />
-            <xs:element name="prenom" type="xs:string" />
-            <xs:element name="cin" type="xs:string" />
-        </xs:sequence>
-    </xs:complexType>
-
 
 </xs:schema>

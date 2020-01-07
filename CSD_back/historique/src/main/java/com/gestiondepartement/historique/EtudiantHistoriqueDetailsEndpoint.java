@@ -3,14 +3,13 @@ package com.gestiondepartement.historique;
 
 import com.gestiondepartement.classes.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Endpoint
@@ -18,14 +17,31 @@ public class EtudiantHistoriqueDetailsEndpoint {
 
 
 	@Autowired
-	private EtudiantHistoriqueRepository etudiantHistoriqueRepository ;
+	private NiveauRepository niveauRepository ;
 
 	// GetCourseDetailsRequest
-	@PayloadRoot(namespace = "http://GestionDepartement.com", localPart = "GetEtudiantsHistoriqueRequest")
+	@PayloadRoot(namespace = "http://GestionDepartement.com", localPart = "GetStatNiveauRequest")
 	@ResponsePayload
-	public GetEtudiantsHistoriqueResponse processEtudiantsHistoriqueRequest(@RequestPayload GetEtudiantsHistoriqueRequest request) {
+	public GetStatNiveauResponse processEtudiantsHistoriqueRequest(@RequestPayload GetStatNiveauRequest request) {
 
-		EtudiantHistorique h = new EtudiantHistorique() ;
+		GetStatNiveauResponse res = new GetStatNiveauResponse();
+
+		String classe = request.getClasse();
+
+	    List<Niveau> list = niveauRepository.findAllByNiv(classe);
+
+        for (Niveau niv: list) {
+            StatNiveau stat = new StatNiveau();
+            stat.setAnnee(niv.getAnnee());
+            stat.setMoyenne(niv.getMoy());
+            res.getStatNiveau().add(stat);
+        }
+
+
+        return res;
+
+
+	    /*EtudiantHistorique h = new EtudiantHistorique() ;
 		h.setId(2);
 		h.setAnnee(2018);
 		h.setMoyenne(12);
@@ -39,7 +55,7 @@ public class EtudiantHistoriqueDetailsEndpoint {
 
 		res.getEtudiantHistorique().add(h) ;
 		
-		return res ;
+		return res ;*/
 	}
 
 //	private GetCourseDetailsResponse mapCourseDetails(Course course) {
