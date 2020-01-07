@@ -17,6 +17,10 @@ export class EtudiantService {
     return this.http.get<Etudiant[]>(this.URL);
   }
 
+  getEtudiant(id): Observable<Etudiant> {
+    return this.http.get<Etudiant>(this.URL +"/" +id);
+  }
+
   postEtudiant(etudiant: Etudiant): Observable<Etudiant> {
     return this.http.post<Etudiant>(this.URL, etudiant);
   }

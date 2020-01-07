@@ -22,4 +22,8 @@ private EnseignantRepository enseignantRepository ;
     public void deleteEnseignant(Integer id){
         this.enseignantRepository.deleteById(id);
     }
+
+    public Enseignant findEnseignant(int id ){
+        return  this.enseignantRepository.findByAuth(id) ;
+    }
 }

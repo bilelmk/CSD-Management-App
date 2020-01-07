@@ -7,12 +7,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EtudiantService {
 
     @Autowired
     private EtudiantRepository etudiantrep ;
+
+    public Etudiant findEtudiant(int id ){
+        return  this.etudiantrep.findByAuth(id) ;
+    }
 
     public List<Etudiant> findAllEtudiants(){
         return this.etudiantrep.findAll();

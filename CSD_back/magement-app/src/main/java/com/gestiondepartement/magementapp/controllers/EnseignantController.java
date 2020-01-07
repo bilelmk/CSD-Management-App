@@ -38,4 +38,12 @@ public class EnseignantController {
     public void delete(@PathVariable Integer id) {
         enseignantService.deleteEnseignant(id);
     }
+
+
+    @CrossOrigin(origins = "*")
+    @GetMapping("{id}")
+    public Enseignant one(@PathVariable Integer id) {
+        Enseignant e = this.enseignantService.findEnseignant(id);
+        return e;
+    }
 }

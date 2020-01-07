@@ -29,7 +29,7 @@ public class Etudiant {
     private String tel ;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private int auth_id  ;
+    private int auth;
 
 
     @ManyToOne
@@ -93,11 +93,15 @@ public class Etudiant {
     }
 
 
-    public int getAuth_id() {
-        return auth_id;
+    public int getAuth() {
+        return auth;
     }
 
     public void setId_etudiant(int id_etudiant) {
         this.id_etudiant = id_etudiant;
+    }
+
+    public void setAuth(int auth) {
+        this.auth = auth;
     }
 }

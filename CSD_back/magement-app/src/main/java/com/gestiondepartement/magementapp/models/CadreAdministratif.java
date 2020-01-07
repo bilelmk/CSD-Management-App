@@ -33,7 +33,7 @@ public class CadreAdministratif {
     private String poste ;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private int auth_id  ;
+    private int auth;
 
     public int getId_cadre() {
         return id_cadre;
@@ -91,11 +91,11 @@ public class CadreAdministratif {
         this.poste = poste;
     }
 
-    public int getAuth_id() {
-        return auth_id;
+    public int getAuth() {
+        return auth;
     }
 
-    public void setAuth_id(int auth_id) {
-        this.auth_id = auth_id;
+    public void setAuth(int auth) {
+        this.auth = auth;
     }
 }

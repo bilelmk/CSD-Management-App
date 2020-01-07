@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {Seance} from '../models/Seance';
+import {EtudiantService} from '../services/etudiant.service';
+import {SeanceService} from '../services/seance.service';
+import {Etudiant} from '../models/Etudiant';
+import {AuthService} from '../services/auth/auth.service';
 
 @Component({
   selector: 'app-espace-etudiant',
@@ -8,82 +12,29 @@ import {Seance} from '../models/Seance';
 })
 export class EspaceEtudiantComponent implements OnInit {
 
-
-  emploi : any ;
-  sc =[
-    {
-      "id_seance": 1,
-      "jour": "Mardi",
-      "heure": "12:00",
-      "type": "TD",
-      "enseignant": {
-        "id_enseignant": 3,
-        "nom": "Hlaoui ",
-        "prenom": "Yosra",
-        "cin": "01236547",
-        "adresse": "aaaaaaaa",
-        "tel": "50123456",
-        "auth_id": 9,
-        "resp_classe": null
-      },
-      "classe": {
-        "id_classe": 1,
-        "libelle": "IF",
-        "niveau": "5",
-        "groupe": "A",
-        "responsable": null,
-        "liste_modules": []
-      },
-      "module": {
-        "id_module": 20,
-        "nom": "C",
-        "coefficient": 7.0,
-        "cours": true,
-        "tp": true,
-        "td": true
-      }
-    },
-    {
-      "id_seance": 2,
-      "jour": "Mercredi",
-      "heure": "12:00",
-      "type": "COURS",
-      "enseignant": {
-        "id_enseignant": 3,
-        "nom": "Hlaoui ",
-        "prenom": "Yosra",
-        "cin": "01236547",
-        "adresse": "aaaaaaaa",
-        "tel": "50123456",
-        "auth_id": 9,
-        "resp_classe": null
-      },
-      "classe": {
-        "id_classe": 3,
-        "libelle": "IF",
-        "niveau": "4",
-        "groupe": "B",
-        "responsable": null,
-        "liste_modules": []
-      },
-      "module": {
-        "id_module": 10,
-        "nom": "Algorithmique et structres de donnees",
-        "coefficient": 10.0,
-        "cours": true,
-        "tp": false,
-        "td": true
-      }
-    }
-  ]
-  constructor() { }
+  me : Etudiant ;
+  emploi : any  ;
+  constructor(private etudiantService : EtudiantService , private seanceService : SeanceService , private authService : AuthService) { }
 
   ngOnInit() {
-    this.emploi = this.getEmploi()
+    let data = this.authService.getAuthData()
+    this.etudiantService.getEtudiant(data.id).subscribe(
+      res => {
+        this.me = res ;
+        this.seanceService.getClasseSeances(this.me.classe).subscribe(
+          res =>{
+            console.log(res)
+            this.emploi = this.getEmploi(res)
+            console.log(this.emploi)          }
+
+        )
+      },
+      err => console.log(err)
+    )
 }
 
 
-  getEmploi(){
+  getEmploi(list : Seance[] ){
     let res = [[null,null,null,null,null,null],
               [null,null,null,null,null,null],
               [null,null,null,null,null,null],
@@ -91,12 +42,12 @@ export class EspaceEtudiantComponent implements OnInit {
               [null,null,null,null,null,null],
               [null,null,null,null,null,null]];
 
-    for(let s of this.sc){
+    for(let s of list){
       for(let i=0 ; i<6 ; i++){
         for(let j=0 ; j<6 ; j++) {
 
           if(this.getjour(s)==i && this.getheure(s)==j){
-            res[i][j] = s ;
+            res[j][i] = s ;
           }
         }
       }
@@ -119,7 +70,7 @@ export class EspaceEtudiantComponent implements OnInit {
     else if(s.heure == "12:00"){return 2}
     else if(s.heure == "13:30"){return 3}
     else if(s.heure == "14:45"){return 4}
-    else return "16:30"
+    else return 5
   }
 
 }

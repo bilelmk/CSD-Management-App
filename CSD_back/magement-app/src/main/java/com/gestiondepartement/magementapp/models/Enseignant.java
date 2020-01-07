@@ -1,8 +1,6 @@
 package com.gestiondepartement.magementapp.models;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.Getter;
-import lombok.Setter;
 
 import javax.persistence.*;
 
@@ -32,7 +30,7 @@ public class Enseignant {
     private String grade ;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private int auth_id  ;
+    private int auth;
 
 //    @OneToMany(mappedBy = "enseignant")
 //    private List<Cours> liste_cours ;
@@ -106,11 +104,11 @@ public class Enseignant {
         this.resp_classe = resp_classe;
     }
 
-    public int getAuth_id() {
-        return auth_id;
+    public int getAuth() {
+        return auth;
     }
 
-    public void setAuth_id(int auth_id) {
-        this.auth_id = auth_id;
+    public void setAuth(int auth) {
+        this.auth = auth;
     }
 }

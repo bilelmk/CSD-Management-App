@@ -45,6 +45,9 @@ import {
 
 } from '@angular/material';
 import {AuthGuard} from '../../services/auth/auth.guard';
+import {EtudiantGuard} from '../../services/auth/etudiant.guard';
+import {EnseignantGuard} from '../../services/auth/enseignant.guard';
+import {CadreGuard} from '../../services/auth/cadre.guard';
 
 @NgModule({
   imports: [
@@ -94,7 +97,7 @@ import {AuthGuard} from '../../services/auth/auth.guard';
     ModulesComponent,
     SeanceComponent
   ],
-  providers: [AuthGuard]
+  providers: [AuthGuard , EtudiantGuard , EnseignantGuard , CadreGuard]
 })
 
 export class AdminLayoutModule {}
