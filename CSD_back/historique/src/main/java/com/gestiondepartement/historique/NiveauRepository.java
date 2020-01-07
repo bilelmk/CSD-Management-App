@@ -8,7 +8,7 @@ public interface NiveauRepository extends MongoRepository<Niveau, String> {
 
     public List<Niveau> findAll();
 
-    public List<Niveau> findAllByNiv(String niv);
+    public List<Niveau> findAllByNivOrderByAnnee(String niv);
 
 }
 

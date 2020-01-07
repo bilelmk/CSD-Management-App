@@ -28,7 +28,7 @@ public class EtudiantHistoriqueDetailsEndpoint {
 
 		String classe = request.getClasse();
 
-	    List<Niveau> list = niveauRepository.findAllByNiv(classe);
+	    List<Niveau> list = niveauRepository.findAllByNivOrderByAnnee(classe);
 
         for (Niveau niv: list) {
             StatNiveau stat = new StatNiveau();

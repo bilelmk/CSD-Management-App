@@ -11,7 +11,9 @@ import { NgxSoapService, Client, ISoapMethodResponse } from 'ngx-soap' ;
 export class StatistiquesComponent implements OnInit {
 
   client :Client ;
-
+  data : any ;
+  moyTab =[]
+  anneeTab =[]
 
   public lineBigDashboardChartType;
   public gradientStroke;
@@ -19,9 +21,21 @@ export class StatistiquesComponent implements OnInit {
   public canvas : any;
   public ctx;
   public gradientFill;
-  public lineBigDashboardChartData:Array<any>;
+
+  public lineBigDashboardChartData:Array<any>= [
+    {
+      label: "Data",
+      pointBorderWidth: 1,
+      pointHoverRadius: 7,
+      pointHoverBorderWidth: 2,
+      pointRadius: 5,
+      fill: true,
+      borderWidth: 2,
+      data :  []
+    }
+    ];
   public lineBigDashboardChartOptions:any;
-  public lineBigDashboardChartLabels:Array<any>;
+  public lineBigDashboardChartLabels:Array<any>=[];
   public lineBigDashboardChartColors:Array<any>
 
   public gradientChartOptionsConfiguration: any;
@@ -66,29 +80,29 @@ export class StatistiquesComponent implements OnInit {
 
 
   constructor(private soap: NgxSoapService) {
-    this.soap.createClient('http://localhost:8081/ws/historiques.wsdl')
-      .then(client => {
-        console.log('Client', client);
-        this.client = client;
-        this.sum();
-      })
-      .catch(err => console.log('Error', err));
   }
-
-  sum() {
-    this.client.call('GetEtudiantsHistorique', {classe: 'IF3'}).subscribe(res => {
-      console.log("mmsks = ");
-      console.log(res.result);
-      console.log("mmsks = ");
-      /*this.xmlResponse = res.responseBody;
-      this.message = res.result.AddResult;
-      this.loading = false;*/
-    }, err => console.log(err));
-
-  }
-
 
   ngOnInit() {
+
+    this.soap.createClient('http://localhost:8081/ws/historiques.wsdl')
+      .then(client => {
+        let l=[] ; let ll =[]
+        console.log('Client', client);
+        this.client = client;
+        this.client.call('GetStatNiveau', {classe: 'IF3'}).subscribe(res => {
+          this.data = res.result.StatNiveau;
+          this.data.sort()
+          this.data.forEach( element => {
+            l.push(element.moyenne)
+            ll.push(element.annee)
+          });
+          this.lineBigDashboardChartData[0].data=l
+          this.lineBigDashboardChartLabels=ll
+        }, err => console.log(err));
+
+      })
+      .catch(err => console.log('Error', err));
+
     this.chartColor = "#FFFFFF";
     this.canvas = document.getElementById("bigDashboardChart");
     this.ctx = this.canvas.getContext("2d");
@@ -101,20 +115,8 @@ export class StatistiquesComponent implements OnInit {
     this.gradientFill.addColorStop(0, "rgba(128, 182, 244, 0)");
     this.gradientFill.addColorStop(1, "rgba(255, 255, 255, 0.24)");
 
-    this.lineBigDashboardChartData = [
-      {
-        label: "Data",
 
-        pointBorderWidth: 1,
-        pointHoverRadius: 7,
-        pointHoverBorderWidth: 2,
-        pointRadius: 5,
-        fill: true,
 
-        borderWidth: 2,
-        data: [50, 150, 100, 190, 130, 90, 150, 160, 120, 140, 190, 95]
-      }
-    ];
     this.lineBigDashboardChartColors = [
       {
         backgroundColor: this.gradientFill,
@@ -125,7 +127,8 @@ export class StatistiquesComponent implements OnInit {
         pointHoverBorderColor: this.chartColor,
       }
     ];
-    this.lineBigDashboardChartLabels = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+    //this.lineBigDashboardChartLabels = this.anneeTab
+
     this.lineBigDashboardChartOptions = {
 
       layout: {
@@ -431,20 +434,9 @@ export class StatistiquesComponent implements OnInit {
           bottom: 15
         }
       }
-    }
-
+    };
     this.lineChartGradientsNumbersType = 'bar';
+
+
   }
-
-
-
-
-
-
-
-
-
-
-
-
 }
