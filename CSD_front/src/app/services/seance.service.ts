@@ -35,8 +35,8 @@ export class SeanceService {
     return this.http.post<Seance[]>(this.URL + "/classe", c);
   }
 
-  getEnseignantSeances(e: Enseignant): Observable<Enseignant[]> {
-    return this.http.post<Enseignant[]>(this.URL + "/enseignant", e);
+  getEnseignantSeances(e: Enseignant): Observable<Seance[]> {
+    return this.http.post<Seance[]>(this.URL + "/enseignant", e);
   }
 
 }

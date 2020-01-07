@@ -20,16 +20,26 @@
             </tr>
             <tr *ngFor="let s of emploi">
               <td style="word-wrap : break-word " >
-                {{s[0] ? s[0].module.nom : "" }}
+                <p>{{s[0] ? s[0].module.nom : ""}}</p>
+                <p class="ens">{{s[0] ? s[0].enseignant.nom : "" }}</p>
               </td>
-              <td>{{s[1] ? s[1].module.nom : ""}}</td>
+              <td>
+                <p>{{s[1] ? s[1].module.nom : ""}}</p>
+                <p class="ens">{{s[1] ? s[1].enseignant.nom : "" }}</p>
+              </td>
               <td>
                 <p>{{s[2] ? s[2].module.nom : ""}}</p>
                 <p class="ens">{{s[2] ? s[2].enseignant.nom : "" }}</p>
               </td>
-              <td>{{s[3] ? s[3].module.nom : ""}}</td>
-              <td>{{s[4] ? s[4].module.nom : ""}}</td>
-              <td>{{s[5] ? s[5].module.nom : ""}}</td>
+              <td>
+                <p>{{s[3] ? s[3].module.nom : ""}}</p>
+                <p class="ens">{{s[3] ? s[3].enseignant.nom : "" }}</p></td>
+              <td>
+                <p>{{s[4] ? s[4].module.nom : ""}}</p>
+                <p class="ens">{{s[4] ? s[4].enseignant.nom : "" }}</p></td>
+              <td>
+                <p>{{s[5] ? s[5].module.nom : ""}}</p>
+                <p class="ens">{{s[5] ? s[5].enseignant.nom : "" }}</p></td>
             </tr>
           </table>
 

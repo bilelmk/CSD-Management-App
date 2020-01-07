@@ -10,7 +10,7 @@ import { Observable } from "rxjs";
 import { AuthService } from "./auth.service";
 
 @Injectable()
-export class AuthGuard implements CanActivate {
+export class CadreGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
 
   canActivate(
@@ -22,19 +22,14 @@ export class AuthGuard implements CanActivate {
     if (!isAuth) {
       this.router.navigate(['/login']);
     }
-    else if(role=="etudiant"){
-      console.log("oui1")
-      this.router.navigate(['app/espace_et']);
+    else if(role=="admin"){
+      this.router.navigate(['app/etudiants']);
     }
     else if(role=="enseignant"){
-      console.log("oui12")
-
       this.router.navigate(['app/espace_en']);
     }
-    else if(role=="cadre"){
-      console.log("oui13")
-
-      this.router.navigate(['app/espace_c']);
+    else if(role=="etudiant"){
+      this.router.navigate(['app/espace_et']);
     }
     return isAuth;
   }

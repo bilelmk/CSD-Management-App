@@ -13,13 +13,16 @@ import {EspaceEtudiantComponent} from '../../espace-etudiant/espace-etudiant.com
 import {EspaceEnseignantComponent} from '../../espace-enseignant/espace-enseignant.component';
 import {EspaceCadreComponent} from '../../espace-cadre/espace-cadre.component';
 import {SeanceComponent} from '../../seance/seance.component';
+import {EtudiantGuard} from '../../services/auth/etudiant.guard';
+import {EnseignantGuard} from '../../services/auth/enseignant.guard';
+import {CadreGuard} from '../../services/auth/cadre.guard';
 
 export const AdminLayoutRoutes: Routes = [
     {path: '', redirectTo: 'etudiants', pathMatch: 'full',},
 
-    { path: 'espace_et',      component: EspaceEtudiantComponent , canActivate: [AuthGuard]  },
-    { path: 'espace_en',    component: EspaceEnseignantComponent  , canActivate: [AuthGuard]  },
-    { path: 'espace_c',         component: EspaceCadreComponent , canActivate: [AuthGuard] },
+    { path: 'espace_et',      component: EspaceEtudiantComponent , canActivate: [EtudiantGuard]    },
+    { path: 'espace_en',    component: EspaceEnseignantComponent  , canActivate : [EnseignantGuard] },
+    { path: 'espace_c',         component: EspaceCadreComponent , canActivate : [CadreGuard] },
 
     { path: 'etudiants',      component: EtudiantsComponent , canActivate: [AuthGuard]  },
     { path: 'enseignants',    component:EnseignantsComponent  , canActivate: [AuthGuard]  },

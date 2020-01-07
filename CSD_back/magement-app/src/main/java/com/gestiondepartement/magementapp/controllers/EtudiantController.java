@@ -22,6 +22,14 @@ public class EtudiantController {
         return etudiants;
     }
 
+
+    @CrossOrigin(origins = "*")
+    @GetMapping("{id}")
+    public Etudiant one(@PathVariable Integer id) {
+        Etudiant et = this.etudiantService.findEtudiant(id);
+        return et;
+    }
+
     @CrossOrigin(origins = "*")
     @PostMapping(consumes = "application/json", produces = "application/json")
     public Etudiant create(@RequestBody Etudiant et) {
