@@ -2,7 +2,7 @@
 // Ce fichier a été généré par l'implémentation de référence JavaTM Architecture for XML Binding (JAXB), v2.2.7 
 // Voir <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2020.01.03 à 05:42:12 AM WAT 
+// Généré le : 2020.01.07 à 02:47:25 PM CET 
 //
 
 
@@ -37,43 +37,27 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetEtudiantsHistoriqueRequest }
+     * Create an instance of {@link GetStatNiveauResponse }
      * 
      */
-    public GetEtudiantsHistoriqueRequest createGetEtudiantsHistoriqueRequest() {
-        return new GetEtudiantsHistoriqueRequest();
+    public GetStatNiveauResponse createGetStatNiveauResponse() {
+        return new GetStatNiveauResponse();
     }
 
     /**
-     * Create an instance of {@link GetEtudiantsHistoriqueResponse }
+     * Create an instance of {@link StatNiveau }
      * 
      */
-    public GetEtudiantsHistoriqueResponse createGetEtudiantsHistoriqueResponse() {
-        return new GetEtudiantsHistoriqueResponse();
+    public StatNiveau createStatNiveau() {
+        return new StatNiveau();
     }
 
     /**
-     * Create an instance of {@link EtudiantHistorique }
+     * Create an instance of {@link GetStatNiveauRequest }
      * 
      */
-    public EtudiantHistorique createEtudiantHistorique() {
-        return new EtudiantHistorique();
-    }
-
-    /**
-     * Create an instance of {@link Etudiant }
-     * 
-     */
-    public Etudiant createEtudiant() {
-        return new Etudiant();
-    }
-
-    /**
-     * Create an instance of {@link Classe }
-     * 
-     */
-    public Classe createClasse() {
-        return new Classe();
+    public GetStatNiveauRequest createGetStatNiveauRequest() {
+        return new GetStatNiveauRequest();
     }
 
 }
