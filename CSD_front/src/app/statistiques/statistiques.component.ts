@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { NgxSoapService, Client, ISoapMethodResponse } from 'ngx-soap' ;
+
+
 
 @Component({
   selector: 'app-statistiques',
@@ -6,6 +9,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./statistiques.component.scss']
 })
 export class StatistiquesComponent implements OnInit {
+
+  client :Client ;
+
 
   public lineBigDashboardChartType;
   public gradientStroke;
@@ -57,7 +63,30 @@ export class StatistiquesComponent implements OnInit {
       return "rgb(" + r + ", " + g + ", " + b + ")";
     }
   }
-  constructor() { }
+
+
+  constructor(private soap: NgxSoapService) {
+    this.soap.createClient('http://localhost:8081/ws/historiques.wsdl')
+      .then(client => {
+        console.log('Client', client);
+        this.client = client;
+        this.sum();
+      })
+      .catch(err => console.log('Error', err));
+  }
+
+  sum() {
+    this.client.call('GetEtudiantsHistorique', {classe: 'IF3'}).subscribe(res => {
+      console.log("mmsks = ");
+      console.log(res.result);
+      console.log("mmsks = ");
+      /*this.xmlResponse = res.responseBody;
+      this.message = res.result.AddResult;
+      this.loading = false;*/
+    }, err => console.log(err));
+
+  }
+
 
   ngOnInit() {
     this.chartColor = "#FFFFFF";
@@ -406,4 +435,16 @@ export class StatistiquesComponent implements OnInit {
 
     this.lineChartGradientsNumbersType = 'bar';
   }
+
+
+
+
+
+
+
+
+
+
+
+
 }

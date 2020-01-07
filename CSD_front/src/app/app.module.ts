@@ -21,6 +21,7 @@ import {
   MatProgressSpinnerModule,
 } from "@angular/material";
 import {AuthInterceptor} from './services/auth/auth-interceptor';
+import {NgxSoapModule} from 'ngx-soap';
 
 
 
@@ -36,6 +37,7 @@ import {AuthInterceptor} from './services/auth/auth-interceptor';
     MatInputModule,
     MatCardModule,
     MatButtonModule,
+    NgxSoapModule,
     MatProgressSpinnerModule,
     ToastrModule.forRoot()
   ],
