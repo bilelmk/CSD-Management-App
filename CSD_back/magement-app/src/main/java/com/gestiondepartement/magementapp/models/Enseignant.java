@@ -32,8 +32,6 @@ public class Enseignant {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private int auth;
 
-//    @OneToMany(mappedBy = "enseignant")
-//    private List<Cours> liste_cours ;
 
     @OneToOne(mappedBy = "responsable")
     private Classe resp_classe ;

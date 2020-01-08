@@ -28,7 +28,7 @@ export class EnseignantsComponent implements OnInit {
 
   @ViewChild(MatSort) sort: MatSort;
 
-  displayedColumns: string[] = ['nom', 'prenom' ,'cin', 'tel', 'adresse', 'actions'];
+  displayedColumns: string[] = ['nom', 'prenom' ,'cin', 'tel','grade' ,'adresse', 'actions'];
 
   enseignants: Enseignant[] = null;
   selectedId = null ;
@@ -58,18 +58,19 @@ export class EnseignantsComponent implements OnInit {
       'cin' : new FormControl(null , Validators.required ),
       'tel' : new FormControl(null , Validators.required ),
       'adresse' : new FormControl(null , Validators.required),
+      'grade' : new FormControl(null , Validators.required),
       'username' : new FormControl(null , [Validators.required , Validators.email] ) ,
       'password' : new FormControl(null , Validators.required) ,
     });
 
-    // this.updateForm = new FormGroup({
-    //   'nom' : new FormControl(null , Validators.required),
-    //   'prenom' : new FormControl(null , Validators.required ),
-    //   'cin' : new FormControl(null , Validators.required ),
-    //   'tel' : new FormControl(null , Validators.required ),
-    //   'poste' : new FormControl(null , Validators.required ),
-    //   'adresse' : new FormControl(null , Validators.required),
-    // })
+    this.updateForm = new FormGroup({
+      'nom' : new FormControl(null , Validators.required),
+      'prenom' : new FormControl(null , Validators.required ),
+      'cin' : new FormControl(null , Validators.required ),
+      'tel' : new FormControl(null , Validators.required ),
+      'grade' : new FormControl(null , Validators.required),
+      'adresse' : new FormControl(null , Validators.required),
+    })
 
   }
 
@@ -132,35 +133,36 @@ export class EnseignantsComponent implements OnInit {
     )
   }
 
-  // update(){
-  //   let cadre : Cadre_administratif ;
-  //   cadre = this.updateForm.value ;
-  //   cadre.id_cadre = this.selectedId ;
-  //   this.cadreService.putCadre(cadre).subscribe(
-  //     res => {
-  //       this.cadres.map(
-  //         c => {
-  //           if(c.id_cadre == this.selectedId){
-  //             c.nom = cadre.nom ; c.prenom = cadre.prenom ; c.cin = cadre.cin ;
-  //             c.poste = cadre.poste ; c.adresse = cadre.adresse ; c.tel = cadre.tel ;
-  //           }
-  //         });
-  //     },
-  //     err => console.log(err),
-  //   )
-  // }
-  //
-  // update_form(id){
-  //   this.selectedId = id ;
-  //   this.updateForm.setValue({
-  //     'nom' : this.cadres.find(res =>{return res.id_cadre == id}).nom,
-  //     'prenom' : this.cadres.find(res =>{return res.id_cadre == id}).prenom,
-  //     'cin' : this.cadres.find(res =>{return res.id_cadre == id}).cin,
-  //     'tel' : this.cadres.find(res =>{return res.id_cadre == id}).tel,
-  //     'poste' : this.cadres.find(res =>{return res.id_cadre == id}).poste,
-  //     'adresse' : this.cadres.find(res =>{return res.id_cadre == id}).adresse
-  //   });
-  // }
+  update(){
+    let ens : Enseignant ;
+    ens = this.updateForm.value ;
+    ens.id_enseignant = this.selectedId ;
+    this.enseignantService.putEnseignant(ens).subscribe(
+      res => {
+        this.enseignants.map(
+          c => {
+            if(c.id_enseignant == this.selectedId){
+              c.nom = ens.nom ; c.prenom = ens.prenom ; c.cin = ens.cin ;
+              c.grade = ens.grade ; c.adresse = ens.adresse ; c.tel = ens.tel ;
+            }
+          });
+      },
+      err => console.log(err),
+    )
+  }
+
+  update_form(id){
+    this.selectedId = id ;
+    this.updateForm.setValue({
+      'nom' : this.enseignants.find(res =>{return res.id_enseignant == id}).nom,
+      'prenom' : this.enseignants.find(res =>{return res.id_enseignant == id}).prenom,
+      'cin' : this.enseignants.find(res =>{return res.id_enseignant == id}).cin,
+      'tel' : this.enseignants.find(res =>{return res.id_enseignant == id}).tel,
+      'grade' : this.enseignants.find(res =>{return res.id_enseignant == id}).grade,
+      'adresse' : this.enseignants.find(res =>{return res.id_enseignant == id}).adresse,
+
+    });
+  }
 
   initializeForm(form){
     form.setValue({
@@ -170,7 +172,8 @@ export class EnseignantsComponent implements OnInit {
       'tel' :  null,
       'adresse' :  null,
       'username' : null  ,
-      'password' : null
+      'password' : null,
+      'grade' : null,
     });
   }
 }

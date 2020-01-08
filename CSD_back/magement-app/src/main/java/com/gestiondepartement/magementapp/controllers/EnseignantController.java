@@ -27,11 +27,11 @@ public class EnseignantController {
         return enseignantService.createEnseignant(e);
     }
 
-//    @CrossOrigin(origins = "*")
-//    @PutMapping
-//    public Enseignant edit(@RequestBody Enseignant e) {
-//        return enseignantService.updateClasse(e);
-//    }
+    @CrossOrigin(origins = "*")
+    @PutMapping
+    public Enseignant edit(@RequestBody Enseignant e) {
+        return enseignantService.updateEnseignant(e);
+    }
 
     @CrossOrigin(origins = "*")
     @DeleteMapping("{id}")
@@ -44,6 +44,6 @@ public class EnseignantController {
     @GetMapping("{id}")
     public Enseignant one(@PathVariable Integer id) {
         Enseignant e = this.enseignantService.findEnseignant(id);
-        return e;
+        return e ;
     }
 }
